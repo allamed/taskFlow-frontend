@@ -7,7 +7,7 @@ import { loginUser, registerUser } from '../features/user/userSlice';
 import { useNavigate } from 'react-router-dom';
 
 const initialState = {
-  name: '',
+  nom: '',
   email: '',
   password: '',
   isMember: true,
@@ -28,8 +28,8 @@ function Register() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    const { name, email, password, isMember } = values;
-    if (!email || !password || (!isMember && !name)) {
+    const { nom, email, password, isMember } = values;
+    if (!email || !password || (!isMember && !nom)) {
       toast.error('Veuillez remplir tous les champs!');
       return;
     }
@@ -37,7 +37,7 @@ function Register() {
       dispatch(loginUser({ email: email, password: password }));
       return;
     }
-    dispatch(registerUser({ name, email, password }));
+    dispatch(registerUser({ nom, email, password }));
   };
 
   const toggleMember = () => {
@@ -59,8 +59,8 @@ function Register() {
         {!values.isMember && (
           <FormRow
             type='text'
-            name='name'
-            value={values.name}
+            name='nom'
+            value={values.nom}
             handleChange={handleChange}
           />
         )}
