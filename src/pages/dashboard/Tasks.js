@@ -15,10 +15,11 @@ export const Tasks = () => {
     dispatch(getAllTasks());
   }, []);
 
-  const { isLoading, tasks, totalTasks } = useSelector(
+  const { isLoading, tasks, mapedTasks, totalTasks } = useSelector(
     (store) => store.allTasks
   );
-  const taskData = mapData(tasks);
+
+  //const taskData = mapData(tasks);
   const handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
     const info = { idTache: cardId, nouveauEtat: targetLaneId };
     dispatch(updateTaskState(info));
@@ -32,7 +33,7 @@ export const Tasks = () => {
         Total : {totalTasks} tache{tasks.length > 1 && 's'}
       </h5>
       <Board
-        data={taskData}
+        data={mapData(tasks)}
         editable
         cardDraggable
         style={{ backgroundColor: ' #f0f4f8' }}

@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import SmallSidebar from './SmallSidebar';
 import FormRowSelect from './FormRowSelect';
 import Loading from './Loading';
+import TeamMember from './teamMember';
 
 export {
   Logo,
@@ -14,4 +15,5 @@ export {
   SmallSidebar,
   FormRowSelect,
   Loading,
+  TeamMember,
 };

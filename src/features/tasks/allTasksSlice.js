@@ -2,11 +2,13 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getUserFromLocalStorage } from '../../utils/localStorage';
 import customFetch, { checkForUnauthorizedResponse } from '../../utils/axios';
 import { toast } from 'react-toastify';
+import { mapData } from '../../utils/taskMaper';
 
 const initialState = {
   isLoading: true,
   tasks: [],
   totalTasks: 0,
+  mapedTasks: {},
 };
 
 export const getAllTasks = createAsyncThunk(
@@ -65,6 +67,8 @@ const allTasksSlice = createSlice({
       .addCase(getAllTasks.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.tasks = payload.taches;
+        state.mapedTasks = mapData(state.tasks);
+        console.log(`statemapedtasks ${state.mapedTasks.lanes}`);
         state.totalTasks = payload.taches.length;
         console.log(payload.taches);
       })
@@ -82,8 +86,9 @@ const allTasksSlice = createSlice({
             return { ...task, etat: payload.tache.etat };
           return task;
         });
+        state.mapedTasks = mapData(state.tasks);
 
-        console.log(payload.tache);
+        //console.log(payload.tache);
       })
       .addCase(updateTaskState.rejected, (state, { payload }) => {
         state.isLoading = false;

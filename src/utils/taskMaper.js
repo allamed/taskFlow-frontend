@@ -6,6 +6,7 @@ export const mapData = (tasks) => {
       deadLine,
       etat,
       projet,
+      responsable,
       titre,
       avancement,
       commentaires,
@@ -13,7 +14,7 @@ export const mapData = (tasks) => {
       return {
         id: `${id}`,
         title: titre,
-        description: 'Can AI make memes',
+        description: `assignée à : ${responsable.nom.toUpperCase()}`,
         label: `deadLine = ${deadLine}`,
         draggable: true,
         debut,
