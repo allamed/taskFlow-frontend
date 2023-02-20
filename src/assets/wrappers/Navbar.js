@@ -64,10 +64,11 @@ const Wrapper = styled.nav`
   }
   .logo-text {
     display: none;
+    font-size:larger;
     margin: 0;
   }
   @media (min-width: 992px) {
-    position: sticky;
+    //position: sticky;
     top: 0;
 
     .nav-center {

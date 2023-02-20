@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.section`
   background: var(--white);
@@ -35,25 +35,13 @@ const Wrapper = styled.section`
     color: var(--white);
     margin-right: 2rem;
   }
-  progress::before {
-    content: attr(value) '%'; /* Display the value of the 'value' attribute as a percentage */
-    position: absolute; /* Position the text */
-    //top: 65%; /* Vertically center the text */
-    left: 48%; /* Horizontally center the text */
-    transform: translate(
-      -50%,
-      -50%
-    ); /* Center the text within the progress bar */
-    font-size: 12px; /* Set the font size */
-    font-weight: bold; /* Make the text bold */
-    color: green; /* Set the text color */
-  }
+
   progress {
     /* Style the container */
-    width: 100%; /* Set the width of the progress bar */
-    height: 10px; /* Set the height of the progress bar */
+    width: 80%; /* Set the width of the progress bar */
+    height: 15px; /* Set the height of the progress bar */
     background-color: #ddd; /* Set the background color of the container */
-    border-radius: 5px; /* Add rounded corners to the container */
+    border-radius: 10px; /* Add rounded corners to the container */
 
     /* Style the progress bar */
     &::-webkit-progress-bar {
@@ -62,7 +50,7 @@ const Wrapper = styled.section`
     }
 
     &::-webkit-progress-value {
-      background-color: #4caf50; /* Set the progress bar color */
+      background-color: #6ab04c; /* Set the progress bar color */
       border-radius: 5px; /* Add rounded corners to the progress bar */
     }
   }
@@ -145,6 +133,135 @@ const Wrapper = styled.section`
   }
   &:hover .actions {
     visibility: visible;
+  }
+  .cardinfo {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 550px;
+  }
+
+  .cardinfo-box {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .cardinfo-box-title {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: #30336b;
+  }
+
+  .cardinfo-box-title p {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .cardinfo-box-title svg {
+    height: 18px;
+    width: 18px;
+  }
+
+  .cardinfo-box-labels {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+
+  .cardinfo-box-labels label {
+    border-radius: 40px;
+    background-color: gray;
+    color: #fff;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .cardinfo-box-labels label svg {
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+  }
+
+  .cardinfo-box ul {
+    display: flex;
+    gap: 5px;
+    margin-left: 20px;
+  }
+  .cardinfo-box ul li {
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .cardinfo-box ul .li-active {
+    box-shadow: 0 0 0 3px yellow;
+    border: 2px solid red;
+    padding: 8px;
+  }
+
+  .cardinfo-box-progress-bar {
+    width: 100%;
+    border-radius: 30px;
+    height: 10px;
+    margin-bottom: 2%;
+  }
+  .notDisplay {
+    display: none;
+  }
+  .cardinfo-box-progress {
+    height: 100%;
+    border-radius: 30px;
+    background-color: skyblue;
+    width: 0;
+    transition: 200ms;
+  }
+
+  .cardinfo-box-task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .cardinfo-box-task-checkbox {
+    display: flex;
+    gap: 5px;
+  }
+
+  .cardinfo-box-task-checkbox input,
+  .cardinfo-box-task-checkbox svg {
+    height: 18px;
+    width: 18px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .cardinfo-box-task-checkbox p {
+    flex: 1;
+    line-height: 18px;
+  }
+
+  .cardinfo-box-task-checkbox .completed {
+    text-decoration-line: line-through;
+  }
+
+  .cardinfo-box input[type="date"] {
+    width: fit-content;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1rem;
+    padding: 5px;
+  }
+  .cardinfo-box-progress-bar progress,
+  .cardinfo-box-progress-bar p {
+    display: inline-block;
   }
 `;
 export default Wrapper;

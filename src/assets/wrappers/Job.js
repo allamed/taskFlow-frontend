@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.article`
   background: var(--white);
@@ -36,7 +36,7 @@ const Wrapper = styled.article`
     }
     p {
       margin: 0;
-      text-transform: capitalize;
+
       color: var(--grey-400);
       letter-spacing: var(--letterSpacing);
     }
@@ -73,7 +73,7 @@ const Wrapper = styled.article`
 
   .status {
     border-radius: var(--borderRadius);
-    text-transform: capitalize;
+
     letter-spacing: var(--letterSpacing);
     text-align: center;
     width: 100px;

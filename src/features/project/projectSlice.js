@@ -1,7 +1,8 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getUserFromLocalStorage } from '../../utils/localStorage';
-import customFetch, { checkForUnauthorizedResponse } from '../../utils/axios';
-import { toast } from 'react-toastify';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getUserFromLocalStorage } from "../../utils/localStorage";
+import customFetch, { checkForUnauthorizedResponse } from "../../utils/axios";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 
 const initialState = {
   isLoading: true,
@@ -10,7 +11,7 @@ const initialState = {
 };
 
 export const getAllProjects = createAsyncThunk(
-  'allProjects/getProjects',
+  "allProjects/getProjects",
   async (_, thunkAPI) => {
     const user = getUserFromLocalStorage();
     let url = `/projets/${user.email}`;
@@ -23,11 +24,25 @@ export const getAllProjects = createAsyncThunk(
     }
   }
 );
+/*export const getTasksByProject = createAsyncThunk(
+  "allProjects/getProjects/getProjectTasks",
+  async (projectId, thunkAPI) => {
+    let url = `/projets/${projectId}/tasks`;
+
+    try {
+      const resp = await customFetch.get(url);
+      return resp.data;
+    } catch (error) {
+      return checkForUnauthorizedResponse(error, thunkAPI);
+    }
+  }
+);*/
+
 export const updateProjectState = createAsyncThunk(
-  'allProjects/updateProjectState',
+  "allProjects/updateProjectState",
   async (info, thunkAPI) => {
     try {
-      const resp = await customFetch.post('/projets/modifierEtat', info);
+      const resp = await customFetch.post("/projets/modifierEtat", info);
       return resp.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -35,8 +50,22 @@ export const updateProjectState = createAsyncThunk(
   }
 );
 
+export const createProject = createAsyncThunk(
+  "allProjects/addNewProject",
+  async (newProject, thunkAPI) => {
+    let url = "/projets/creerProjet";
+
+    try {
+      const resp = await customFetch.post(url, newProject);
+      return resp.data;
+    } catch (error) {
+      return checkForUnauthorizedResponse(error, thunkAPI);
+    }
+  }
+);
+
 const allProjectsSlice = createSlice({
-  name: 'allProjects',
+  name: "allProjects",
   initialState,
   reducers: {
     showLoading: (state) => {
@@ -88,7 +117,35 @@ const allProjectsSlice = createSlice({
       .addCase(updateProjectState.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
+      })
+      .addCase(createProject.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createProject.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.projects = [...state.projects, payload.projet];
+        console.log("projet créée");
+        toast.success("projet créé avec succès!");
+      })
+      .addCase(createProject.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        toast.error(payload);
       });
+    /*.addCase(getTasksByProject.pending, (state) => {})
+      .addCase(getTasksByProject.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        const currentProjectId = payload.idProjet;
+        state.projects = state.projects.map((p) => {
+          if (p.id == currentProjectId) p.tasks = payload.taches;
+          return p;
+        });
+
+        //toast.success("tasks got from backend");
+      })
+      .addCase(getTasksByProject.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        toast.error(payload);
+      })*/
   },
 });
 export default allProjectsSlice.reducer;

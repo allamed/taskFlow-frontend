@@ -1,28 +1,46 @@
-import React from 'react';
-import { Loading, TeamMember } from '../../components';
-import { useDispatch, useSelector } from 'react-redux/es/exports';
-import { useEffect } from 'react';
-import Wrapper from '../../assets/wrappers/ProjectDetails';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import Board from 'react-trello';
-import NewCardForm from 'react-trello';
-import CardSubmitButton from 'react-trello';
-import { mapData } from '../../utils/taskMaper';
-import { updateTaskState } from '../../features/tasks/allTasksSlice';
-import { useState } from 'react';
-import NewTask from '../../components/NewTask';
-import { createTask } from '../../features/tasks/addNewTaskSlice';
-import { MdOutlineAddCircleOutline } from 'react-icons/md';
+import React from "react";
+import { Loading, TeamMember } from "../../components";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { useEffect } from "react";
+import Wrapper from "../../assets/wrappers/ProjectDetails";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import Board from "react-trello";
+import NewCardForm from "react-trello";
+import CardSubmitButton from "react-trello";
+import { mapData } from "../../utils/taskMaper";
+
+import { useState } from "react";
+import NewTask from "../../components/NewTask";
+
+import { MdOutlineAddCircleOutline } from "react-icons/md";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 import {
   getProjectTasks,
+  updateTaskState,
+  createTask,
   getProjectMembers,
-} from '../../features/currentProject/currentProjectSlice';
-import { TaskModal } from '../../components/TaskModal';
-import { GiLargeDress } from 'react-icons/gi';
+  addMemberToProject,
+  getCurrentProject,
+  getCurrentTask,
+} from "../../features/currentProject/currentProjectSlice";
+import { TaskModal } from "../../components/TaskModal";
+import { IoMdAdd } from "react-icons/io";
+import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
+import { Avatar } from "@mui/material";
+import { stringAvatar } from "../../utils/utilsFunctions";
+import { RiArrowGoBackLine } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
+import { getAllTasks } from "../../features/tasks/allTasksSlice";
+import { setDashboardText } from "../../features/user/userSlice";
 
 export const ProjetcDetails = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setDashboardText("Détails du projet"));
+  }, []);
   const { project } = useSelector((store) => store.currentProject);
   console.log(project);
 
@@ -32,11 +50,12 @@ export const ProjetcDetails = () => {
   const { tasks, isLoading } = useSelector((store) => store.currentProject);
   //console.log('les taches');
   //console.log(tasks);
-  const membersDup = [...project.payload.membres];
+  const membersDup = useSelector((store) => store.currentProject).members;
+  // [...project.payload.membres];
   const members = membersDup.filter(
     (item, index) => membersDup.findIndex((i) => i.id === item.id) === index
   );
-  console.log(members);
+  //console.log(members);
 
   const [taskData, setTaskData] = useState(tasks);
 
@@ -49,36 +68,26 @@ export const ProjetcDetails = () => {
 
     //setTaskData(mapData(tasks));
   };
-  const getMaxCardsPerLane = () => {
-    let maxCards = 0;
-    mapData(tasks).lanes.forEach((lane) => {
-      maxCards = Math.max(maxCards, lane.cards.length);
-    });
+  let navigate = useNavigate();
 
-    return maxCards;
-  };
   const getAvancement = () => {
-    return (
+    return Math.round(
       tasks.reduce((total, task) => total + task.avancement, 0) / tasks.length
     );
   };
   //modal
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [currentTask, setCurrentTask] = useState({});
+  const [currentTaskId, setCurrentTaskId] = useState({});
 
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };
   const handleCardClick = (taskId) => {
-    toggleModal();
-    const task = tasks.find((t) => {
-      return t.id == taskId;
-    });
-    console.log('current task');
-
-    setCurrentTask(task);
+    if (!modalIsOpen) toggleModal();
+    dispatch(getCurrentTask(taskId));
+    setCurrentTaskId(taskId);
   };
-  const [boardHeight, setBoardHeight] = useState(500);
+
   const [newTaskModalIsOpen, setNewTaskModalIsOpen] = useState(false);
   const handleOpenModal = () => {
     setNewTaskModalIsOpen(true);
@@ -86,8 +95,8 @@ export const ProjetcDetails = () => {
 
   const handleCloseModal = () => {
     setNewTaskModalIsOpen(false);
-    setTitle('');
-    setAssignee('');
+    setTitle("");
+    setAssignee("");
     setDeadline(null);
   };
   const addNewTask = () => {
@@ -99,9 +108,26 @@ export const ProjetcDetails = () => {
     };
     dispatch(createTask(newTask));
   };
-  const [title, setTitle] = useState('');
-  const [assignee, setAssignee] = useState('');
+  const [title, setTitle] = useState("");
+  const [assignee, setAssignee] = useState("");
   const [deadline, setDeadline] = useState(null);
+  const [addMemberFormIsOpen, setAddMemberFormIsOpen] = useState(false);
+  const [emailToAdd, setEmailToAdd] = useState("");
+  function toggleAddMemberForm() {
+    setAddMemberFormIsOpen(!addMemberFormIsOpen);
+  }
+  function addMember(e) {
+    e.preventDefault();
+    if (members.find((x) => x.email == emailToAdd) != null) {
+      toast.error("cet utilisateur fait déjà parti de votre projet");
+      setEmailToAdd("");
+      return;
+    }
+    const data = { email: emailToAdd, id: project.payload.id };
+    dispatch(addMemberToProject(data));
+    setEmailToAdd("");
+    //console.log('add member with email '+ emailToAdd);
+  }
 
   if (isLoading) {
     return <Loading />;
@@ -109,59 +135,78 @@ export const ProjetcDetails = () => {
 
   return (
     <Wrapper>
-      <div className='main'>
+      <div className="main">
         <header>
-          <div className='main-icon'>{project.payload.nom.charAt(0)}</div>
+          {/*<div className='main-icon'>{project.payload.nom.charAt(0)}</div>*/}
+          <Avatar
+            {...stringAvatar(project.payload.nom)}
+            style={{ margin: "1%" }}
+          />
 
-          <div className='info'>
+          <div className="info">
             <h5>{project.payload.nom}</h5>
           </div>
         </header>
 
-        <div className='projet'>
-          <div className='details'>
-            <div className='progress'>
+        <div className="projet">
+          <div className="details">
+            <div className="progres">
               <h5
                 style={{
-                  color: '#48484C',
+                  color: "#48484C",
 
                   marginBottom: 3,
-                  fontSize: 'large',
+                  fontSize: "large",
                 }}
               >
-                {' '}
+                {" "}
                 {!isNaN(getAvancement()) && `Avancement ${getAvancement()} %`}
               </h5>
-              <progress value={getAvancement()} max='100' />
+              <progress value={getAvancement()} max="100" />
             </div>
             <header />
-            <div className='board-container'>
-              <h5
-                style={{
-                  color: '#48484C',
 
-                  marginBottom: 10,
-                  marginTop: 40,
+            <div style={{ textAlign: "right" }}>
+              <button
+                style={{
+                  backgroundColor: "initial",
+
+                  margin: "auto",
+                  border: "none",
+                  color: "white",
                 }}
+                onClick={handleOpenModal}
+                title="Créer une nouvelle tache"
               >
-                Taches du projet
-              </h5>
+                <MdOutlineAddCircleOutline
+                  style={{
+                    color: "#284387",
+                    fontSize: "xx-large",
+                    cursor: "hand",
+                  }}
+                />
+              </button>
+            </div>
+
+            <div className="board-container">
               <Board
-                data={mapData(tasks)}
+                data={mapData(tasks, true)}
                 editable
                 cardDraggable
                 style={{
-                  backgroundColor: ' #f0f4f8',
-                  height: '400px',
-                  paddingTop: '1%',
+                  backgroundColor: " #F6F2FF",
+                  //zIndex: '-1',
+
+                  paddingTop: "1%",
                 }}
+                laneStyle={{ backgroundColor: " #D7CBF6" }}
                 handleDragEnd={handleDragEnd}
                 onCardClick={(cardId) => handleCardClick(cardId)}
               >
                 <NewCardForm
-                  descriptionPlaceholder='assignée à '
-                  labelPlaceholder='deadLine'
-                  titlePlaceholder='intitulé'
+                  descriptionPlaceholder="assignée à "
+                  labelPlaceholder="deadLine"
+                  titlePlaceholder="intitulé"
                   onSubmit={(card) => console.log(card)}
                 >
                   <CardSubmitButton />
@@ -169,12 +214,12 @@ export const ProjetcDetails = () => {
               </Board>
             </div>
           </div>
-          <div className='membres'>
+          <div className="membres">
             <h5
               style={{
-                display: 'flex',
-                justifyContent: 'center',
-                color: 'white',
+                display: "flex",
+                justifyContent: "center",
+                color: "white",
               }}
             >
               membres du projet
@@ -185,31 +230,68 @@ export const ProjetcDetails = () => {
 
             <button
               style={{
-                backgroundColor: 'initial',
-                display: 'block',
-                margin: 'auto',
-                border: 'none',
-                color: 'white',
+                backgroundColor: "initial",
+                display: "block",
+                margin: "auto",
+                border: "none",
+                color: "white",
               }}
+              onClick={toggleAddMemberForm}
             >
               <MdOutlineAddCircleOutline
-                style={{ color: 'white', fontSize: '30px', cursor: 'hand' }}
+                style={{ color: "white", fontSize: "30px", cursor: "hand" }}
               />
             </button>
+            {addMemberFormIsOpen && (
+              <Form
+                onSubmit={addMember}
+                style={{ marginLeft: "6%", marginTop: "3%", marginRight: "6%" }}
+              >
+                <div
+                  className="form-group "
+                  style={{ display: "grid", alignItems: "center" }}
+                >
+                  <input
+                    type="email"
+                    value={emailToAdd}
+                    onChange={(e) => setEmailToAdd(e.target.value)}
+                    placeholder="Email"
+                    required
+                    style={{
+                      borderRadius: "5px",
+                      border: "none",
+                      width: "100%",
+                      height: "40px",
+                    }}
+                  />
+                  <Button
+                    type="submit"
+                    style={{
+                      marginTop: "3%",
+                      fontSize: "12px",
+                      marginLeft: "20%",
+                      marginRight: "20%",
+                      backgroundColor: "#32257A",
+                      border: "none",
+                    }}
+                  >
+                    Ajouter
+                  </Button>
+                </div>
+              </Form>
+            )}
           </div>
 
-          <div style={{ clear: 'both' }} />
+          <div style={{ clear: "both" }} />
         </div>
         {modalIsOpen && (
-          <TaskModal currentTask={currentTask} toggleModal={toggleModal} />
+          <TaskModal
+            currentTaskId={currentTaskId}
+            toggleModal={toggleModal}
+            chef={true}
+          />
         )}
-        <button
-          onClick={handleOpenModal}
-          className='btn'
-          style={{ margin: '1%' }}
-        >
-          Add new task
-        </button>
+
         {newTaskModalIsOpen && (
           <NewTask
             handleCloseModal={handleCloseModal}

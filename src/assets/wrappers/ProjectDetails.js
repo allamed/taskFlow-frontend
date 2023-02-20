@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Wrapper = styled.section`
   .main {
-    background-color: #fff;
+    background-color: #f9f6ff;
     padding: 1%;
     border-radius: 1%;
   }
@@ -27,9 +27,14 @@ const Wrapper = styled.section`
     border: 50;
     background-color: #bfc5fe;
   }
+  .react-trello-board {
+    @media (max-width: 1600px) {
+      display: grid;
+    }
+  }
   .main-icon {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     display: grid;
     place-items: center;
     background: var(--primary-500);
@@ -58,17 +63,17 @@ const Wrapper = styled.section`
     font-size: 2em;
     margin: 20px 0;
   }
-  .progress {
+  .progres {
     width: 80%; /* Set the width of the progress bar */
     margin: 2%; /* Center the progress bar */
   }
 
-  .progress h4 {
+  .progres h4 {
     text-align: center; /* Center the text */
     margin-bottom: 10px; /* Add some space between the text and the progress bar */
   }
 
-  .progress progress {
+  .progres progress {
     width: 100%; /* Make the progress bar span the entire width of the parent element */
     appearance: none; /* Remove the default styling of the progress bar */
     background-color: #ddd; /* Set the background color */
@@ -76,18 +81,18 @@ const Wrapper = styled.section`
     height: 15px; /* Set the height */
   }
 
-  .progress progress::-webkit-progress-bar {
+  .progres progress::-webkit-progress-bar {
     background-color: #fff; /* Set the background color for Webkit-based browsers */
     border-radius: 10px;
     border: 1px solid #ddd;
   }
 
-  .progress progress::-webkit-progress-value {
-    background-color: #4caf50; /* Set the progress color for Webkit-based browsers */
+  .progres progress::-webkit-progress-value {
+    background-color: #2ecc71; /* Set the progress color for Webkit-based browsers */
     border-radius: 10px; /* Add some rounded corners for Webkit-based browsers */
   }
 
-  .progress progress::-moz-progress-bar {
+  .progres progress::-moz-progress-bar {
     background-color: #4caf50; /* Set the progress color for Firefox */
   }
   .membres {
@@ -96,9 +101,9 @@ const Wrapper = styled.section`
     height: 100%;
     float: right;
     align-items: center;
-    background-color: #7866e1;
+    background-color: #9968f2;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: none;
 
     padding: 1%;
   }
@@ -124,6 +129,5 @@ const Wrapper = styled.section`
     width: 2.5rem;
     line-height: 2.5rem;
   }
- 
 `;
 export default Wrapper;

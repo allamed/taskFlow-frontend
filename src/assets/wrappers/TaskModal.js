@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.section`
   .modal {
@@ -15,36 +15,37 @@ const Wrapper = styled.section`
   }
 
   .modal-body {
-    background-color: white;
+    background-color: #fdf9ff;
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     padding: 20px;
-    width: 80%;
-    max-width: 500px;
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    height: 100%;
+    overflow-y: auto;
   }
 
   .modal-body h1 {
     margin-top: 0;
   }
   .back-button {
-    display: flex;
-    align-items: right;
-    justify-content: flex-start;
-    //position: absolute;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px; /* for example */
+    color: #e74c3c;
     top: 10px;
     right: 20px;
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     border: none;
     background: none;
     cursor: pointer;
     outline: none;
+    font-size: x-large;
   }
 
-  .back-button AiOutlineClose {
-    font-size: 150px;
-    color: #666;
-  }
   header {
     padding: 1rem 1.5rem;
     border-bottom: 1px solid var(--grey-100);

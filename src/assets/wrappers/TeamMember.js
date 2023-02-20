@@ -1,29 +1,48 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.section`
   .team-member {
+    border: none;
     display: flex;
     align-items: center;
-    margin: 16px 0;
-    border-radius: 8px;
+    margin: 1%;
+    border-radius: 12px;
     border: 1px solid #ddd;
     overflow: hidden;
     margin: 16px;
-    padding: 8px;
+    padding: 2%;
     background-color: #fff;
+    @media (min-width: 576px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (min-width: 992px) {
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 1120px) {
+      grid-template-columns: 1fr 1fr;
+    }
   }
-
-  .team-member img {
-    width: 48px;
-    height: 48px;
+  .initial {
+    width: 10%;
+    height: auto;
+    @media (max-width: 1600px) {
+      display: none;
+    }
+    display: grid;
+    place-items: center;
+    background: #575fcf;
     border-radius: 50%;
-    margin-right: 16px;
+    font-size: medium;
+    margin: auto;
+    text-transform: uppercase;
+    color: var(--white);
   }
 
   .team-member-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: auto;
   }
 
   .team-member-info h3 {
@@ -33,7 +52,7 @@ const Wrapper = styled.section`
   }
 
   .team-member-info p {
-    margin: 4px 0 0 0;
+    margin: 2px 0 0 0;
     font-size: 14px;
     color: #666;
   }

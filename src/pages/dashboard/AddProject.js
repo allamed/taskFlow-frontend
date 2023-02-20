@@ -9,59 +9,29 @@ import {
   editProject,
 } from '../../features/project/projectSlice';
 import { useEffect } from 'react';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 const AddProject = () => {
-  /* 
-  const {
-    isLoading,
-    // id,
-    nom,
-    chef,
-    // membres,
-    debut,
-    // taches,
-    avancement,
-    isEditing,
-    editProjectId,
-  } = useSelector((store) => store.project);
 
-  const { user } = useSelector((store) => store.user);
-  const dispatch = useDispatch();
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  return ( <Form>
+    <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Label>Email address</Form.Label>
+      <Form.Control type="email" placeholder="Enter email" />
+      <Form.Text className="text-muted">
+        We'll never share your email with anyone else.
+      </Form.Text>
+    </Form.Group>
 
-    if (!nom || !debut || !chef) {
-      toast.error('Veuillez remplir tous les champs');
-      return;
-    }
-    if (isEditing) {
-      dispatch(
-        editProject({
-          projectId: editProjectId,
-          project: { nom, debut, avancement },
-        })
-      );
-      return;
-    }
-    dispatch(createProject({ nom, chef, debut }));
-  };
-
-  const handleProjectInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    dispatch(handleChange({ name, value }));
-  };
-
-  useEffect(() => {
-    if (!isEditing) {
-      dispatch(
-        handleChange({
-          name: 'projectLocation',
-          value: user.location,
-        })
-      );
-    }
-  }, []);
- */
-  return <h1>add project</h1>;
+    <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Label>Password</Form.Label>
+      <Form.Control type="password" placeholder="Password" />
+    </Form.Group>
+    <Form.Group className="mb-3" controlId="formBasicCheckbox">
+      <Form.Check type="checkbox" label="Check me out" />
+    </Form.Group>
+    <Button variant="primary" type="submit">
+      Submit
+    </Button>
+  </Form>);
 };
 export default AddProject;
