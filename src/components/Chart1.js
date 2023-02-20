@@ -1,13 +1,13 @@
 import * as React from "react";
-import Paper from "@mui/material/Paper";
+/*import Paper from "@mui/material/Paper";
 import {
   Chart,
-  BarSeries,
+  ScatterSeries,
   Title,
   ArgumentAxis,
   ValueAxis,
-} from "@devexpress/dx-react-chart-material-ui";
-import { Animation } from "@devexpress/dx-react-chart";
+} from "@devexpress/dx-react-chart-material-ui";*/
+//import { Animation } from "@devexpress/dx-react-chart";
 
 export default class Chart1 extends React.PureComponent {
   constructor(props) {
@@ -26,16 +26,17 @@ export default class Chart1 extends React.PureComponent {
     const colors = ["orange", "blue"];
 
     return (
-      <Paper>
+      /*<Paper>
         <Chart data={chartData} width="300" height="400">
           <ArgumentAxis />
           <ValueAxis max={2} />
 
-          <BarSeries valueField="value" argumentField="type" />
+          <ScatterSeries valueField="value" argumentField="type" />
 
-          <Animation />
+          {/!*<Animation />*!/}
         </Chart>
-      </Paper>
+      </Paper>*/
+      <></>
     );
   }
 }
