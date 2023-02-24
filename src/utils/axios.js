@@ -2,7 +2,11 @@ import axios from "axios";
 import { clearStore } from "../features/user/userSlice";
 import { getUserFromLocalStorage } from "./localStorage";
 
-export const urlBase = "https://10.72.176.108:9455";
+export const urlBase =
+  // "http://ec2-15-188-207-170.eu-west-3.compute.amazonaws.com:8080";
+  //"http://192.168.187.186:8080";
+  "/api";
+
 const customFetch = axios.create({
   baseURL: urlBase,
 });

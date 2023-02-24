@@ -35,6 +35,7 @@ import { RiArrowGoBackLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { getAllTasks } from "../../features/tasks/allTasksSlice";
 import { setDashboardText } from "../../features/user/userSlice";
+import { MDBCol, MDBRow } from "mdb-react-ui-kit";
 
 export const ProjetcDetails = () => {
   const dispatch = useDispatch();
@@ -148,8 +149,10 @@ export const ProjetcDetails = () => {
           </div>
         </header>
 
-        <div className="projet">
-          <div className="details">
+        {/*<div className="projet">*/}
+        <MDBRow className="row-cols-1 row-cols-md-4 g-7">
+          <MDBCol className="col-md-10">
+            {/*<div className="details ">*/}
             <div className="progres">
               <h5
                 style={{
@@ -213,13 +216,19 @@ export const ProjetcDetails = () => {
                 </NewCardForm>
               </Board>
             </div>
-          </div>
-          <div className="membres">
+            {/*</div>*/}
+          </MDBCol>
+          <MDBCol
+            className="col-md-2"
+            style={{ backgroundColor: "#9968f2", marginTop: "5%" }}
+          >
+            {/*<div className="membres">*/}
             <h5
               style={{
                 display: "flex",
                 justifyContent: "center",
                 color: "white",
+                marginTop: "5%",
               }}
             >
               membres du projet
@@ -245,7 +254,11 @@ export const ProjetcDetails = () => {
             {addMemberFormIsOpen && (
               <Form
                 onSubmit={addMember}
-                style={{ marginLeft: "6%", marginTop: "3%", marginRight: "6%" }}
+                style={{
+                  marginLeft: "6%",
+                  marginTop: "3%",
+                  marginRight: "6%",
+                }}
               >
                 <div
                   className="form-group "
@@ -280,10 +293,12 @@ export const ProjetcDetails = () => {
                 </div>
               </Form>
             )}
-          </div>
+            {/*</div>*/}
 
-          <div style={{ clear: "both" }} />
-        </div>
+            <div style={{ clear: "both" }} />
+            {/*</div>*/}
+          </MDBCol>
+        </MDBRow>
         {modalIsOpen && (
           <TaskModal
             currentTaskId={currentTaskId}

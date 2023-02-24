@@ -131,7 +131,7 @@ const Project = ({
                 dispatch(setCurrentProject(project));
                 dispatch(getProjectTasks(project.id));
                 dispatch(getProjectMembers(project.id));
-                if (!isSidebarOpen) dispatch(toggleSidebar());
+                if (isSidebarOpen) dispatch(toggleSidebar());
               }}
             >
               Voir plus
