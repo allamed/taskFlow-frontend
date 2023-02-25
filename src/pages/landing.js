@@ -15,12 +15,10 @@ const Landing = () => {
             Task <span> Flow</span>
           </h1>
           <p>
-            TaskFlow simplifie la gestion de vos tâches en vous permettant de
-            créer des projets, d'ajouter des membres et d'assigner des tâches.
-            Suivez facilement l'avancement de chaque tâche grâce à notre
-            interface intuitive. Restez également informé des tâches créées par
-            vos supérieurs pour une meilleure communication et une collaboration
-            plus efficace.
+            Gérer efficacement les taches que vous assignez aux membres de
+            vosgit équipes grâce à notre interface intuitive. Restez également
+            informé des tâches créées par vos supérieurs pour une meilleure
+            communication et une collaboration plus efficace.
           </p>
 
           <Link to="/register" className="btn btn-hero">
