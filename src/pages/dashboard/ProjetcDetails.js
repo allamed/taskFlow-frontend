@@ -192,6 +192,16 @@ export const ProjetcDetails = () => {
             </div>
 
             <div className="board-container">
+              <p
+                style={{
+                  marginBottom: "2px",
+                  color: "#576574",
+                  fontSize: "smaller",
+                  marginLeft: "35%",
+                }}
+              >
+                cliquez sur la tache pour voir plus
+              </p>
               <Board
                 data={mapData(tasks, true)}
                 editable

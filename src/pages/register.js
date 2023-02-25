@@ -98,12 +98,10 @@ function Register() {
           type="button"
           className="btn btn-block btn-hipster"
           disabled={isLoading}
-          onClick={() =>
-            /* dispatch(
-              loginUser({ email: 'testUser@test.com', password: 'secret' })
-            ) */
-            console.log("f")
-          }
+          onClick={() => {
+            dispatch(loginUser({ email: "allam@gmail.com", password: "123" }));
+            toggleSidebar();
+          }}
         >
           {isLoading ? "loading..." : "demo app"}
         </button>

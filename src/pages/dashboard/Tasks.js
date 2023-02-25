@@ -59,7 +59,16 @@ export const Tasks = () => {
             {tasks.length > 1 && "s"}
           </p>
           <Divider sx={{ marginBottom: "2%", marginTop: "2px" }} />
-
+          <p
+            style={{
+              marginBottom: "2px",
+              color: "#576574",
+              fontSize: "smaller",
+              marginLeft: "35%",
+            }}
+          >
+            cliquez sur la tache pour voir plus
+          </p>
           <Board
             data={mapData(tasks, false)}
             editable
