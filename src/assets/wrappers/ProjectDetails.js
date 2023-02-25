@@ -129,5 +129,14 @@ const Wrapper = styled.section`
     width: 2.5rem;
     line-height: 2.5rem;
   }
+  .toggle-btn {
+    background: transparent;
+    border-color: transparent;
+    font-size: 1.75rem;
+    color: var(--primary-500);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
 `;
 export default Wrapper;

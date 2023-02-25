@@ -1,30 +1,33 @@
-import main from '../assets/images/main.svg';
-import styled from 'styled-components';
-import { Logo } from '../components';
-import { Link } from 'react-router-dom';
+import main from "../assets/images/main.svg";
+import styled from "styled-components";
+import { Logo } from "../components";
+import { Link } from "react-router-dom";
 const Landing = () => {
   return (
     <Wrapper>
       <nav>
         <Logo />
       </nav>
-      <div className='container page'>
+      <div className="container page">
         {/* info */}
-        <div className='info'>
+        <div className="info">
           <h1>
-            Task <span> Flow</span> application
+            Task <span> Flow</span>
           </h1>
           <p>
-            Crucifix narwhal street art asymmetrical, humblebrag tote bag pop-up
-            fixie raclette taxidermy craft beer. Brunch bitters synth, VHS
-            crucifix heirloom meggings bicycle rights.
+            TaskFlow simplifie la gestion de vos tâches en vous permettant de
+            créer des projets, d'ajouter des membres et d'assigner des tâches.
+            Suivez facilement l'avancement de chaque tâche grâce à notre
+            interface intuitive. Restez également informé des tâches créées par
+            vos supérieurs pour une meilleure communication et une collaboration
+            plus efficace.
           </p>
 
-          <Link to='/register' className='btn btn-hero'>
+          <Link to="/register" className="btn btn-hero">
             Login/Register
           </Link>
         </div>
-        <img src={main} alt='job hunt' className='img main-img' />
+        <img src={main} alt="job hunt" className="img main-img" />
       </div>
     </Wrapper>
   );

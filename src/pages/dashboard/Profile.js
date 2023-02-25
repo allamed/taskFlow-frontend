@@ -235,11 +235,6 @@ const Profile = () => {
             <MDBCardText className="lead fw-normal mb-0">
               Statistiques
             </MDBCardText>
-            <MDBCardText className="mb-0">
-              <a href="#!" className="text-muted">
-                Show all
-              </a>
-            </MDBCardText>
           </div>
           <MDBRow className="row-cols-1 row-cols-md-4 g-7">
             <MDBCol>

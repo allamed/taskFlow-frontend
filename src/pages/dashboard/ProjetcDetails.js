@@ -36,6 +36,7 @@ import { useNavigate } from "react-router-dom";
 import { getAllTasks } from "../../features/tasks/allTasksSlice";
 import { setDashboardText } from "../../features/user/userSlice";
 import { MDBCol, MDBRow } from "mdb-react-ui-kit";
+import { MDBCard, MDBCardHeader, MDBCardText } from "mdbreact";
 
 export const ProjetcDetails = () => {
   const dispatch = useDispatch();
@@ -171,19 +172,18 @@ export const ProjetcDetails = () => {
 
             <div style={{ textAlign: "right" }}>
               <button
+                className="button-81"
+                role="button"
                 style={{
-                  backgroundColor: "initial",
-
-                  margin: "auto",
-                  border: "none",
-                  color: "white",
+                  padding: "7px",
+                  marginLeft: "35px",
+                  marginBottom: "5px",
                 }}
                 onClick={handleOpenModal}
                 title="Créer une nouvelle tache"
               >
                 <MdOutlineAddCircleOutline
                   style={{
-                    color: "#284387",
                     fontSize: "xx-large",
                     cursor: "hand",
                   }}
@@ -220,83 +220,79 @@ export const ProjetcDetails = () => {
           </MDBCol>
           <MDBCol
             className="col-md-2"
-            style={{ backgroundColor: "#9968f2", marginTop: "5%" }}
+            style={{ marginTop: "5%", borderRadius: "5%", borderColor: "gray" }}
           >
             {/*<div className="membres">*/}
-            <h5
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                color: "white",
-                marginTop: "5%",
-              }}
-            >
-              membres du projet
-            </h5>
-            {members.map((member) => {
-              return <TeamMember key={member.id} member={member} />;
-            })}
+            <MDBCard style={{ backgroundColor: "#f9f9ff" }}>
+              <MDBCardHeader style={{ alignSelf: "center" }}>
+                Membres
+              </MDBCardHeader>
 
-            <button
-              style={{
-                backgroundColor: "initial",
-                display: "block",
-                margin: "auto",
-                border: "none",
-                color: "white",
-              }}
-              onClick={toggleAddMemberForm}
-            >
-              <MdOutlineAddCircleOutline
-                style={{ color: "white", fontSize: "30px", cursor: "hand" }}
-              />
-            </button>
-            {addMemberFormIsOpen && (
-              <Form
-                onSubmit={addMember}
+              {members.map((member) => {
+                return <TeamMember key={member.id} member={member} />;
+              })}
+
+              <button
+                className="button-81"
+                role="button"
+                title="ajouter un membre"
+                onClick={toggleAddMemberForm}
                 style={{
-                  marginLeft: "6%",
-                  marginTop: "3%",
-                  marginRight: "6%",
+                  marginLeft: "40%",
+                  marginRight: "40%",
+                  padding: "3px",
+                  marginBottom: "2%",
                 }}
               >
-                <div
-                  className="form-group "
-                  style={{ display: "grid", alignItems: "center" }}
+                <MdOutlineAddCircleOutline style={{ fontSize: "larger" }} />
+              </button>
+              {addMemberFormIsOpen && (
+                <Form
+                  onSubmit={addMember}
+                  style={{
+                    marginLeft: "6%",
+                    marginTop: "3%",
+                    marginRight: "6%",
+                  }}
                 >
-                  <input
-                    type="email"
-                    value={emailToAdd}
-                    onChange={(e) => setEmailToAdd(e.target.value)}
-                    placeholder="Email"
-                    required
-                    style={{
-                      borderRadius: "5px",
-                      border: "none",
-                      width: "100%",
-                      height: "40px",
-                    }}
-                  />
-                  <Button
-                    type="submit"
-                    style={{
-                      marginTop: "3%",
-                      fontSize: "12px",
-                      marginLeft: "20%",
-                      marginRight: "20%",
-                      backgroundColor: "#32257A",
-                      border: "none",
-                    }}
+                  <div
+                    className="form-group "
+                    style={{ display: "grid", alignItems: "center" }}
                   >
-                    Ajouter
-                  </Button>
-                </div>
-              </Form>
-            )}
-            {/*</div>*/}
+                    <input
+                      type="email"
+                      value={emailToAdd}
+                      onChange={(e) => setEmailToAdd(e.target.value)}
+                      placeholder="Email"
+                      required
+                      style={{
+                        borderRadius: "5px",
+                        border: "none",
+                        width: "100%",
+                        height: "40px",
+                      }}
+                    />
+                    <Button
+                      type="submit"
+                      style={{
+                        marginTop: "3%",
+                        fontSize: "12px",
+                        marginLeft: "20%",
+                        marginRight: "20%",
+                        backgroundColor: "#32257A",
+                        border: "none",
+                      }}
+                    >
+                      Ajouter
+                    </Button>
+                  </div>
+                </Form>
+              )}
+              {/*</div>*/}
 
-            <div style={{ clear: "both" }} />
-            {/*</div>*/}
+              <div style={{ clear: "both" }} />
+              {/*</div>*/}
+            </MDBCard>
           </MDBCol>
         </MDBRow>
         {modalIsOpen && (

@@ -5,11 +5,13 @@ const Wrapper = styled.section`
     border: none;
     display: flex;
     align-items: center;
-    margin: 1%;
+
     border-radius: 12px;
     border: 1px solid #ddd;
     overflow: hidden;
-    margin: 16px;
+
+    margin: 3%;
+
     padding: 2%;
     background-color: #fff;
     @media (min-width: 576px) {
@@ -33,7 +35,7 @@ const Wrapper = styled.section`
     background: #575fcf;
     border-radius: 50%;
     font-size: medium;
-    margin: auto;
+    margin: 3%;
     text-transform: uppercase;
     color: var(--white);
   }

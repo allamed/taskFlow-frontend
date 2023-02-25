@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { Landing, Error, Register, ProtectedRoute } from "./pages";
+import { Landing, Error, Register, ProtectedRoute, Home } from "./pages";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -9,7 +9,6 @@ import {
   Projects,
   Stats,
   SharedLayout,
-  AddProject,
   ProjetcDetails,
 } from "./pages/dashboard";
 function App() {
@@ -24,11 +23,11 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route index element={<Projects />} />
+          <Route index element={<Home />} />
           <Route path="tasks" element={<Tasks />} />
           <Route path="projects" element={<Projects />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="add-project" element={<AddProject />} />
+
           <Route path="project-details" element={<ProjetcDetails />} />
         </Route>
         <Route path="landing" element={<Landing />} />
