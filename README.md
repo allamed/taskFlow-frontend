@@ -1,7 +1,7 @@
 # Live preview
 https://tasksflow.netlify.app/
+![gif x2_edit_1](https://user-images.githubusercontent.com/93490149/221445272-57571d82-f2ab-4ab3-b2ae-04069e919a83.gif)
 
-![clideo_editor_97e83329e5994803ba6ab6562d8ac2d5](https://user-images.githubusercontent.com/93490149/221418040-c3099d5d-bf52-4731-a482-e3e7ee5ecf12.gif)
 # Overview
 ![1](https://user-images.githubusercontent.com/93490149/221418528-45fb183e-2bf4-4540-9cfd-58a32688f01c.PNG)
 ![2](https://user-images.githubusercontent.com/93490149/221418559-a807cfcb-8f4b-4f87-88d0-120af3a181d6.PNG)
