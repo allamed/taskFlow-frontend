@@ -10,7 +10,7 @@ https://tasksflow.netlify.app/
 https://github.com/allamed/taskFlow-backEnd
 
 ## Ps
-leave a star if you found the project usefel
+Leave a star if you found the project useful
 
 
 
