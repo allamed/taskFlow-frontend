@@ -13,7 +13,7 @@ https://tasksflow.netlify.app/
 https://github.com/allamed/taskFlow-backEnd
 
 ## mobile 
-https://github.com/allamed/taskflow-mobile
+https://github.com/allamed/taskFlow_mobile
 
 ## Ps
 Leave a star if you found the project useful
