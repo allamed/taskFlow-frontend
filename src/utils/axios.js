@@ -4,7 +4,7 @@ import { getUserFromLocalStorage } from "./localStorage";
 
 export const urlBase =
   //"http://ec2-15-188-207-170.eu-west-3.compute.amazonaws.com:8080";
-  "/api";
+  "http://ec2-18-156-69-58.eu-central-1.compute.amazonaws.com:8080";
 
 const customFetch = axios.create({
   baseURL: urlBase,
